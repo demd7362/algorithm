@@ -31,3 +31,24 @@ function permutation(arr) {
     }
     return results;
 }
+
+function combination(arr,n){
+    if(n === 0) return [[]];
+    if(n > arr.length) return [];
+
+    const results = [];
+    const [first,...rest] = arr;
+    // first를 포함하는 조합
+    const withFirst = combination(rest, n - 1);
+    for (const comb of withFirst) {
+        results.push([first, ...comb]);
+    }
+
+    // first를 포함하지 않는 조합
+    const withoutFirst = combination(rest, n);
+    for (const comb of withoutFirst) {
+        results.push(comb);
+    }
+
+    return results;
+}
